@@ -3,7 +3,6 @@ package bg.softuni.WeddingApp.model.entity;
 import bg.softuni.WeddingApp.model.enums.LocationEnum;
 import jakarta.persistence.*;
 
-import java.util.List;
 @Entity
 @Table(name = "location")
 public class Location extends BaseEntity{
@@ -13,6 +12,10 @@ public class Location extends BaseEntity{
 
 
     public Location() {
+    }
+
+    public Location(LocationEnum locationEnum) {
+        this.name = locationEnum;
     }
 
     public LocationEnum getName() {

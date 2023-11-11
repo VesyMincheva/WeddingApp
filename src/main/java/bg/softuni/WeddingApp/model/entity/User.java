@@ -1,8 +1,6 @@
 package bg.softuni.WeddingApp.model.entity;
 
 import jakarta.persistence.*;
-
-import java.util.List;
 import java.util.Set;
 
 @Entity

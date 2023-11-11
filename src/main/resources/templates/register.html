@@ -5,6 +5,10 @@
 
 </head>
 <body>
+<header>
+    <nav th:replace="~{fragments/navbar}"></nav>
+</header>
+
 <main class="p-5 align-content-center bg-blur my-register-div">
     <h1 class="border-bottom">Register</h1>
     <div class="d-flex justify-content-center ">
@@ -39,7 +43,6 @@
                         <input name="email"
                                th:field="*{email}"
                                th:errorclass="is-invalid"
-								required
                                type="email"
                                id="inputEmail"
                                class="form-control"
@@ -57,7 +60,6 @@
                         <input name="password"
                                th:field="*{password}"
                                th:errorclass="is-invalid"
-                                required minlength="5" maxlength="20"
                                type="password"
                                id="inputPassword"
                                class="form-control"
@@ -77,7 +79,6 @@
                         <input name="confirmPassword"
                                th:field="*{confirmPassword}"
                                th:errorclass="is-invalid"
-                                required minlength="5" maxlength="20"
                                type="password"
                                id="inputConfirmPassword"
                                class="form-control"

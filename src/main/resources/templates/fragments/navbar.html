@@ -6,29 +6,35 @@
 <body>
 <nav th:fragment="navbar" class="main-nav">
     <ul>
-        <li>
+        <li th:if="${@loggedUser.getId() > 0}">
+            <a href="/"> <th:block th:text="${@loggedUser.getUsername()}"></th:block>'s Home</a>
+        </li>
+        <li th:unless="${@loggedUser.getId() > 0}">
             <a href="/">Home</a>
         </li>
-        <li>
+        <li th:unless="${@loggedUser.getId() > 0}">
             <a href="/login">Login</a>
         </li>
-        <li>
+        <li th:unless="${@loggedUser.getId() > 0}">
             <a href="/register">Register</a>
         </li>
         <li>
             <a href="/about">About</a>
         </li>
-        <li>
-            <a href="/">Add new wedding</a>
+        <li th:if="${@loggedUser.getId() > 0}">
+            <a href="/add">Add new wedding</a>
         </li>
-        <li>
+        <li th:if="${@loggedUser.getId() > 0}">
             <a href="/">Profile</a>
         </li>
-        <li>
+        <li th:if="${@loggedUser.getId() > 0}">
             <a href="/">Admin</a>
         </li>
-        <li>
-            <a href="/">Logout</a>
+        <li th:if="${@loggedUser.getId() > 0}">
+            <div>
+                <a href="/logout">Logout</a>
+            </div>
+
         </li>
     </ul>
 </nav>

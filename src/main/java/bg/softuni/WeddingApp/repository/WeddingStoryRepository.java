@@ -6,4 +6,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface WeddingStoryRepository extends JpaRepository<WeddingStory, Long> {
+
+
 }

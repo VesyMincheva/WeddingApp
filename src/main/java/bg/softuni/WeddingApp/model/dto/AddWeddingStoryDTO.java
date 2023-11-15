@@ -2,18 +2,20 @@ package bg.softuni.WeddingApp.model.dto;
 
 import bg.softuni.WeddingApp.model.entity.Location;
 import bg.softuni.WeddingApp.model.entity.Style;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 
 public class AddWeddingStoryDTO {
+    @NotNull
     private String title;
 
     private LocalDate date;
-
+    @NotNull
     private String content;
-
+    @NotNull
     private Location location;
-
+    @NotNull
     private Style style;
 
     public AddWeddingStoryDTO() {

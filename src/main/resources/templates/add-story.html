@@ -25,9 +25,11 @@
                 <label for="title" class="col-form-label ">Title</label>
             </div>
             <div class="form-group">
-                <input name="title"
-                       type="text"
+                <input
                        id="title"
+                       type="text"
+                       th:name="title"
+                       th:errorclass="is-invalid"
                        class="form-control"
                        aria-describedby="inputNameError">
                 <small id="inputNameError"
@@ -38,11 +40,13 @@
 
         <div>
             <div class="form-group">
-                <label for="inputDescription" class="col-form-label ">Content</label>
+                <label for="content" class="col-form-label ">Content</label>
             </div>
             <div class="form-group">
                     <textarea name="content"
-                              id="inputDescription"
+                              id="content"
+                              th:name="content"
+                              th:errorclass="is-invalid"
                               class="form-control"
                               aria-describedby="inputDescriptionError"></textarea>
                 <small id="inputDescriptionError"
@@ -53,28 +57,52 @@
         <div>
             <div class="form-group">
                 <label for="location">Location</label>
-                <select id="location" class="custom-select">
+                <select id="location"
+                        th:name="location"
+                        th:errorclass="is-invalid"
+                        class="custom-select">
                     <option value="" selected>Select location</option>
-                    <option value="1" text="ADVANCED">Select location</option>
+                    <option th:each="e : ${locations}"
+                            th:text="${e}"
+                            th:value="${e}">
+                        </option>
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Select location of your wedding!
+                    </p>
                 </select>
             </div>
         </div>
         <div>
             <div class="form-group">
                 <label for="style">Style</label>
-                <select id="style" class="custom-select">
+                <select id="style"
+                        th:name="style"
+                        th:errorclass="is-invalid"
+                        class="custom-select">
                     <option value="" selected>Select style of the wedding</option>
-                    <option value="1" text="ADVANCED">Select style of the wedding</option>
+                    <option th:each="e : ${styles}"
+                            th:text="${e}"
+                            th:value="${e}">
+                        Select style of the wedding</option>
+                    <p class="invalid-feedback errors alert alert-danger">
+                        Select style of your wedding!
+                    </p>
                 </select>
             </div>
         </div>
         <div>
 
-            <div class="form-group">
-                <label for="videoUrl">Video Url (only last eleven characters from Youtube)</label>
-                <input id="videoUrl" type="text"
-                       class="form-control" placeholder="Video url">
-            </div>
+<!--            <div class="form-group">-->
+<!--                <label for="imageUrl">Image from wedding</label>-->
+<!--                <input id="imageUrl"-->
+<!--                       th:name="imageUrl"-->
+<!--                       th:errorclass="is-invalid"-->
+<!--                       type="text"-->
+<!--                       class="form-control" placeholder="Write image URL from your wedding">-->
+<!--                <p class="invalid-feedback errors alert alert-danger">-->
+<!--                    Valid image URL is required.-->
+<!--                </p>-->
+<!--            </div>-->
         </div>
 
         <div>

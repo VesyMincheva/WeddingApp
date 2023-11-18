@@ -1,11 +1,17 @@
 package bg.softuni.WeddingApp.model.entity;
 
 import jakarta.persistence.*;
+
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 @Table(name = "users")
 public class User extends BaseEntity{
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
     @Column(name = "username", unique = true, nullable = false)
     private String username;
 
@@ -24,6 +30,7 @@ public class User extends BaseEntity{
 
 
     public User() {
+        this.roles = new HashSet<>();
     }
 
     public String getUsername() {
@@ -51,7 +58,6 @@ public class User extends BaseEntity{
     }
 
     public Set<Role> getRoles () {
-
         return roles;
     }
 
@@ -61,5 +67,21 @@ public class User extends BaseEntity{
         return this;
     }
 
+    public String getFirstName() {
+        return firstName;
+    }
 
+    public User setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public User setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+    }
 }

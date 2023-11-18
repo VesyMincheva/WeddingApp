@@ -9,6 +9,7 @@ import bg.softuni.WeddingApp.session.LoggedUser;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
@@ -45,6 +46,9 @@ public class UserServiceImpl implements UserService {
         }
         //TODO: use model mapper and activation link
         User user = new User();
+//        user.setRoles()
+        user.setFirstName(userRegistrationDTO.getFirstName());
+        user.setLastName(userRegistrationDTO.getLastName());
         user.setUsername(userRegistrationDTO.getUsername());
         user.setEmail(userRegistrationDTO.getEmail());
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));

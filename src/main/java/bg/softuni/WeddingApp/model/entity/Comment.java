@@ -22,6 +22,24 @@ public class Comment extends BaseEntity{
     @ManyToOne
     private WeddingStory story;
 
+    public User getCreatedBy() {
+        return createdBy;
+    }
+
+    public Comment setCreatedBy(User createdBy) {
+        this.createdBy = createdBy;
+        return this;
+    }
+
+    public WeddingStory getStory() {
+        return story;
+    }
+
+    public Comment setStory(WeddingStory story) {
+        this.story = story;
+        return this;
+    }
+
     public Comment() {
     }
 

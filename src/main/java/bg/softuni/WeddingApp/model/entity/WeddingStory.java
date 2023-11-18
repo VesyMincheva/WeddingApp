@@ -3,7 +3,11 @@ package bg.softuni.WeddingApp.model.entity;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+
 @Entity
 @Table(name = "wedding_stories")
 public class WeddingStory extends BaseEntity{
@@ -24,9 +28,36 @@ public class WeddingStory extends BaseEntity{
     @ManyToOne
     private Style style;
 
+    @OneToMany(targetEntity = Comment.class, mappedBy = "story", cascade = CascadeType.ALL)
+    private List<Comment> comments;
+
+    @OneToMany(targetEntity = Picture.class, mappedBy = "story", cascade = CascadeType.ALL)
+    private Set<Picture> pictures;
+
 
     public WeddingStory() {
+        this.comments = new ArrayList<>();
+        this.pictures = new HashSet<>();
     }
+
+    public Set<Picture> getPictures() {
+        return pictures;
+    }
+
+    public WeddingStory setPictures(Set<Picture> pictures) {
+        this.pictures = pictures;
+        return this;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public WeddingStory setComments(List<Comment> comments) {
+        this.comments = comments;
+        return this;
+    }
+
 
     public String getTitle() {
         return title;

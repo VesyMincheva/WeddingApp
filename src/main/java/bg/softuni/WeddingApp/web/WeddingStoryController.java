@@ -60,7 +60,7 @@ public class WeddingStoryController {
         return "story";
     }
 
-    @GetMapping("/stories/details")
+    @GetMapping("/stories/details/{id}")
     public String storyDetail(){
         return "story-details";
     }

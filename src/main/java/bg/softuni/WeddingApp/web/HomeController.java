@@ -20,9 +20,9 @@ public class HomeController {
     @GetMapping ("/")
     public String loggedOutIndex(Model model) {
 
-        List<WeddingStory> mostCommentedStory = weddingStoryService.getMostCommentedStory();
+        WeddingStory mostCommentedStory = weddingStoryService.getMostCommentedStory();
 
-        model.addAttribute("mostCommented", mostCommentedStory.get(0));
+        model.addAttribute("mostCommented", mostCommentedStory);
         return "index";
     }
 

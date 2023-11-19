@@ -22,7 +22,7 @@ public class WeddingStoryServiceImpl implements WeddingStoryService {
         //TODO: implement logic
     }
 
-    public List<WeddingStory> getMostCommentedStory() {
-        return weddingStoryRepository.findMostCommented();
+    public WeddingStory getMostCommentedStory() {
+        return weddingStoryRepository.findMostCommented().get(0);
     }
 }

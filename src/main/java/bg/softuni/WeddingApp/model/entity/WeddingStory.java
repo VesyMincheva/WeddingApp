@@ -29,7 +29,7 @@ public class WeddingStory extends BaseEntity{
     @OneToMany(targetEntity = Comment.class, mappedBy = "story", cascade = CascadeType.ALL)
     private List<Comment> comments;
 
-    @OneToMany(targetEntity = Picture.class, mappedBy = "story", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Picture.class, mappedBy = "story", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<Picture> pictures;
 
 

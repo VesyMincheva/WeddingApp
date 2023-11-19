@@ -6,10 +6,10 @@ import bg.softuni.WeddingApp.model.entity.User;
 import bg.softuni.WeddingApp.repository.UserRepository;
 import bg.softuni.WeddingApp.service.UserService;
 import bg.softuni.WeddingApp.session.LoggedUser;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
 import java.util.Optional;
 @Service
 public class UserServiceImpl implements UserService {
@@ -18,12 +18,15 @@ public class UserServiceImpl implements UserService {
     private final LoggedUser loggedUser;
     private final PasswordEncoder passwordEncoder;
 
+    private final ModelMapper modelMapper;
+
     public UserServiceImpl(UserRepository userRepository,
                            LoggedUser loggedUser,
-                           PasswordEncoder passwordEncoder) {
+                           PasswordEncoder passwordEncoder, ModelMapper modelMapper) {
         this.userRepository = userRepository;
         this.loggedUser = loggedUser;
         this.passwordEncoder = passwordEncoder;
+        this.modelMapper = modelMapper;
     }
 
     @Override
@@ -46,6 +49,7 @@ public class UserServiceImpl implements UserService {
         }
         //TODO: use model mapper and activation link
         User user = new User();
+//        User user = modelMapper.map(userRegistrationDTO, User.class);
 //        user.setRoles()
         user.setFirstName(userRegistrationDTO.getFirstName());
         user.setLastName(userRegistrationDTO.getLastName());

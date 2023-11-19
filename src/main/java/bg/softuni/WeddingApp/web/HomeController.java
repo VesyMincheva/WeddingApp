@@ -1,13 +1,28 @@
 package bg.softuni.WeddingApp.web;
 
+import bg.softuni.WeddingApp.model.entity.WeddingStory;
+import bg.softuni.WeddingApp.service.impl.WeddingStoryServiceImpl;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import java.util.List;
 
 @Controller
 public class HomeController {
 
+    private final WeddingStoryServiceImpl weddingStoryService;
+
+    public HomeController(WeddingStoryServiceImpl weddingStoryService) {
+        this.weddingStoryService = weddingStoryService;
+    }
+
     @GetMapping ("/")
-    public String loggedOutIndex() {
+    public String loggedOutIndex(Model model) {
+
+        List<WeddingStory> mostCommentedStory = weddingStoryService.getMostCommentedStory();
+
+        model.addAttribute("mostCommented", mostCommentedStory.get(0));
         return "index";
     }
 

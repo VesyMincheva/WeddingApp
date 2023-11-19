@@ -13,8 +13,6 @@ import java.util.Set;
 public class WeddingStory extends BaseEntity{
     @Column(name = "title", nullable = false)
     private String title;
-    @Column(name = "date")
-    private LocalDate date;
 
     @Column(name = "content", columnDefinition = "TEXT")
     private String content;
@@ -22,7 +20,7 @@ public class WeddingStory extends BaseEntity{
     @ManyToOne
     private User author;
 
-    @ManyToOne
+    @ManyToOne(targetEntity = Location.class)
     private Location location;
 
     @ManyToOne
@@ -65,14 +63,6 @@ public class WeddingStory extends BaseEntity{
 
     public void setTitle(String title) {
         this.title = title;
-    }
-
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public void setDate(LocalDate date) {
-        this.date = date;
     }
 
     public String getContent() {

@@ -4,7 +4,7 @@ import bg.softuni.WeddingApp.model.enums.LocationEnum;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "location")
+@Table(name = "locations")
 public class Location extends BaseEntity{
     @Column(name = "name", nullable = false, unique = true)
     @Enumerated(EnumType.STRING)

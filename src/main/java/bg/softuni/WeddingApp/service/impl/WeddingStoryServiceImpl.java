@@ -1,9 +1,12 @@
 package bg.softuni.WeddingApp.service.impl;
 
 import bg.softuni.WeddingApp.model.dto.AddWeddingStoryDTO;
+import bg.softuni.WeddingApp.model.entity.WeddingStory;
 import bg.softuni.WeddingApp.repository.WeddingStoryRepository;
 import bg.softuni.WeddingApp.service.WeddingStoryService;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class WeddingStoryServiceImpl implements WeddingStoryService {
@@ -17,5 +20,9 @@ public class WeddingStoryServiceImpl implements WeddingStoryService {
     @Override
     public void addStory(AddWeddingStoryDTO addWeddingStoryDTO) {
         //TODO: implement logic
+    }
+
+    public List<WeddingStory> getMostCommentedStory() {
+        return weddingStoryRepository.findMostCommented();
     }
 }

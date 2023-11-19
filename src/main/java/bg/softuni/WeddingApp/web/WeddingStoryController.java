@@ -54,4 +54,14 @@ public class WeddingStoryController {
         }
         return "redirect:/home";
     }
+
+    @GetMapping("/stories/all")
+    public String getAllStories(){
+        return "story";
+    }
+
+    @GetMapping("/stories/details")
+    public String storyDetail(){
+        return "story-details";
+    }
 }

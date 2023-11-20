@@ -7,16 +7,15 @@ import jakarta.validation.constraints.NotNull;
 import java.time.LocalDate;
 
 public class AddWeddingStoryDTO {
+
     @NotNull
     private String title;
-
-    private LocalDate date;
     @NotNull
     private String content;
     @NotNull
-    private Location location;
+    private String location;
     @NotNull
-    private Style style;
+    private String style;
 
     public AddWeddingStoryDTO() {
     }
@@ -30,15 +29,6 @@ public class AddWeddingStoryDTO {
         return this;
     }
 
-    public LocalDate getDate() {
-        return date;
-    }
-
-    public AddWeddingStoryDTO setDate(LocalDate date) {
-        this.date = date;
-        return this;
-    }
-
     public String getContent() {
         return content;
     }
@@ -48,20 +38,20 @@ public class AddWeddingStoryDTO {
         return this;
     }
 
-    public Location getLocation() {
+    public String getLocation() {
         return location;
     }
 
-    public AddWeddingStoryDTO setLocation(Location location) {
+    public AddWeddingStoryDTO setLocation(String location) {
         this.location = location;
         return this;
     }
 
-    public Style getStyle() {
+    public String getStyle() {
         return style;
     }
 
-    public AddWeddingStoryDTO setStyle(Style style) {
+    public AddWeddingStoryDTO setStyle(String style) {
         this.style = style;
         return this;
     }

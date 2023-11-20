@@ -52,6 +52,7 @@ public class WeddingStoryController {
                     "org.springframework.validation.BindingResult.addWeddingStoryDTO",bindingResult);
             return "redirect:/add";
         }
+        weddingStoryService.addStory(addWeddingStoryDTO);
         return "redirect:/home";
     }
 

@@ -1,6 +1,6 @@
 package bg.softuni.WeddingApp.service.impl;
 
-import bg.softuni.WeddingApp.model.dto.UserRoles;
+import bg.softuni.WeddingApp.model.enums.UserRoles;
 import bg.softuni.WeddingApp.model.entity.Role;
 import bg.softuni.WeddingApp.repository.RoleRepository;
 import bg.softuni.WeddingApp.service.RoleService;

@@ -17,7 +17,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final LoggedUser loggedUser;
     private final PasswordEncoder passwordEncoder;
-
     private final ModelMapper modelMapper;
 
     public UserServiceImpl(UserRepository userRepository,
@@ -47,20 +46,14 @@ public class UserServiceImpl implements UserService {
         if (userByUsername.isPresent()){
             return false;
         }
-        //TODO: use model mapper and activation link
-        User user = new User();
-//        User user = modelMapper.map(userRegistrationDTO, User.class);
-//        user.setRoles()
-        user.setFirstName(userRegistrationDTO.getFirstName());
-        user.setLastName(userRegistrationDTO.getLastName());
-        user.setUsername(userRegistrationDTO.getUsername());
-        user.setEmail(userRegistrationDTO.getEmail());
+        //TODO:activation link
+        User user = modelMapper.map(userRegistrationDTO, User.class);
         user.setPassword(passwordEncoder.encode(userRegistrationDTO.getPassword()));
+        //        user.setRoles()
         this.userRepository.save(user);
 
         return true;
     }
-
     @Override
     public void logOutUser() {
         loggedUser.logout();
@@ -89,6 +82,5 @@ public class UserServiceImpl implements UserService {
         }
 
         return loginSuccess;
-
     }
 }

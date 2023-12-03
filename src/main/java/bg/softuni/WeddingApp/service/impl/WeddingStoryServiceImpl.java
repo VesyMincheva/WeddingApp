@@ -1,17 +1,21 @@
 package bg.softuni.WeddingApp.service.impl;
 
 import bg.softuni.WeddingApp.model.dto.AddWeddingStoryDTO;
+import bg.softuni.WeddingApp.model.dto.StoryDetailsDto;
+import bg.softuni.WeddingApp.model.dto.StoryGetAllDto;
 import bg.softuni.WeddingApp.model.entity.Location;
 import bg.softuni.WeddingApp.model.entity.Style;
 import bg.softuni.WeddingApp.model.entity.User;
 import bg.softuni.WeddingApp.model.entity.WeddingStory;
 import bg.softuni.WeddingApp.repository.UserRepository;
 import bg.softuni.WeddingApp.repository.WeddingStoryRepository;
+import bg.softuni.WeddingApp.service.LocationService;
 import bg.softuni.WeddingApp.service.WeddingStoryService;
 import bg.softuni.WeddingApp.session.LoggedUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -23,10 +27,15 @@ public class WeddingStoryServiceImpl implements WeddingStoryService {
     private final ModelMapper modelMapper;
 
     private final UserRepository userRepository;
-    private final LocationServiceImpl locationService;
+    private final LocationService locationService;
     private final StyleServiceImpl styleService;
 
-    public WeddingStoryServiceImpl(WeddingStoryRepository weddingStoryRepository, LoggedUser loggedUser, ModelMapper modelMapper, UserRepository userRepository, LocationServiceImpl locationService, StyleServiceImpl styleService) {
+    public WeddingStoryServiceImpl(WeddingStoryRepository weddingStoryRepository,
+                                   LoggedUser loggedUser,
+                                   ModelMapper modelMapper,
+                                   UserRepository userRepository,
+                                   LocationService locationService,
+                                   StyleServiceImpl styleService) {
         this.weddingStoryRepository = weddingStoryRepository;
         this.loggedUser = loggedUser;
         this.modelMapper = modelMapper;
@@ -51,6 +60,23 @@ public class WeddingStoryServiceImpl implements WeddingStoryService {
     }
 
     public WeddingStory getMostCommentedStory() {
-        return weddingStoryRepository.findMostCommented().get(0);
+        WeddingStory mostCommentedStory = weddingStoryRepository.findMostCommented().stream()
+                .findFirst().orElse(null);
+        return mostCommentedStory;
+    }
+
+    @Override
+    public List<StoryGetAllDto> getAll() {
+        return weddingStoryRepository.findAll().stream()
+                .map(story -> modelMapper.map(story,StoryGetAllDto.class))
+                .toList();
+    }
+
+    @Override
+    public StoryDetailsDto getDetails(Long id) {
+        WeddingStory byId = weddingStoryRepository.findById(id).orElse(null);
+
+        StoryDetailsDto mappedStory = modelMapper.map(byId, StoryDetailsDto.class);
+        return mappedStory;
     }
 }

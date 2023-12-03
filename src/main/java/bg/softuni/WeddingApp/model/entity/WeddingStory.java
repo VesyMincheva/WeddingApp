@@ -26,7 +26,7 @@ public class WeddingStory extends BaseEntity{
     @ManyToOne
     private Style style;
 
-    @OneToMany(targetEntity = Comment.class, mappedBy = "story", cascade = CascadeType.ALL)
+    @OneToMany(targetEntity = Comment.class, mappedBy = "story", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> comments;
 
     @OneToMany(targetEntity = Picture.class, mappedBy = "story", cascade = CascadeType.ALL, fetch = FetchType.EAGER)

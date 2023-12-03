@@ -1,4 +1,4 @@
-package bg.softuni.WeddingApp.model.dto;
+package bg.softuni.WeddingApp.model.enums;
 
 public enum UserRoles {
     USER, ADMIN

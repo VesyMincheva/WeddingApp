@@ -1,6 +1,6 @@
 package bg.softuni.WeddingApp.model.entity;
 
-import bg.softuni.WeddingApp.model.dto.UserRoles;
+import bg.softuni.WeddingApp.model.enums.UserRoles;
 import jakarta.persistence.*;
 
 @Entity

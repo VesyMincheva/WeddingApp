@@ -14,12 +14,11 @@
         <div class="row g-3 align-items-center">
 
             <form
-                    th:action="@{/login}"
-                    th:method="POST"
-                    th:object="${userLoginDTO}">
+                    action="/login"
+                    method="POST">
 
                 <h3 class="mt-5 text-center">
-                    <strong th:if="${badCredentials}" class="rounded  pl-3 text-danger">Enter valid
+                    <strong class="rounded  pl-3 text-danger">Enter valid
                         username and
                         password</strong>
                 </h3>
@@ -30,8 +29,6 @@
                     <div class="col-auto">
                         <input type="text"
                                name="username"
-                               th:field="*{username}"
-                               th:errorclass="is-invalid"
                                id="inputUsername"
                                class="form-control"
                                aria-describedby="usernameHelpInline">
@@ -49,8 +46,6 @@
                     <div class="col-auto">
                         <input type="password"
                                name="password"
-                               th:field="*{password}"
-                               th:errorclass="is-invalid"
                                id="inputPassword" class="form-control "
                                aria-describedby="passwordHelpInline">
                         <small

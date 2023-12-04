@@ -11,7 +11,6 @@ import bg.softuni.WeddingApp.repository.UserRepository;
 import bg.softuni.WeddingApp.repository.WeddingStoryRepository;
 import bg.softuni.WeddingApp.service.LocationService;
 import bg.softuni.WeddingApp.service.WeddingStoryService;
-import bg.softuni.WeddingApp.session.LoggedUser;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +21,6 @@ import java.util.Optional;
 public class WeddingStoryServiceImpl implements WeddingStoryService {
 
     private final WeddingStoryRepository weddingStoryRepository;
-    private final LoggedUser loggedUser;
 
     private final ModelMapper modelMapper;
 
@@ -31,13 +29,11 @@ public class WeddingStoryServiceImpl implements WeddingStoryService {
     private final StyleServiceImpl styleService;
 
     public WeddingStoryServiceImpl(WeddingStoryRepository weddingStoryRepository,
-                                   LoggedUser loggedUser,
                                    ModelMapper modelMapper,
                                    UserRepository userRepository,
                                    LocationService locationService,
                                    StyleServiceImpl styleService) {
         this.weddingStoryRepository = weddingStoryRepository;
-        this.loggedUser = loggedUser;
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
         this.locationService = locationService;
@@ -46,11 +42,11 @@ public class WeddingStoryServiceImpl implements WeddingStoryService {
 
     @Override
     public void addStory(AddWeddingStoryDTO addWeddingStoryDTO) {
-        Optional<User> author = userRepository.findUserByUsername(loggedUser.getUsername());
+//        Optional<User> author = userRepository.findUserByUsername();
         Location location = locationService.getLocation(addWeddingStoryDTO.getLocation());
         Style style = styleService.getStyle(addWeddingStoryDTO.getStyle());
         WeddingStory newWeddingStory = new WeddingStory();
-        author.ifPresent(newWeddingStory::setAuthor);
+//        author.ifPresent(newWeddingStory::setAuthor);
         newWeddingStory.setTitle(addWeddingStoryDTO.getTitle());
         newWeddingStory.setContent(addWeddingStoryDTO.getContent());
         newWeddingStory.setLocation(location);

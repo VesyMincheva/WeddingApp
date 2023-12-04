@@ -1,8 +1,6 @@
 package bg.softuni.WeddingApp.web;
 
-import bg.softuni.WeddingApp.model.dto.UserLoginDTO;
 import bg.softuni.WeddingApp.model.dto.UserRegistrationDTO;
-import bg.softuni.WeddingApp.model.entity.WeddingStory;
 import bg.softuni.WeddingApp.service.UserService;
 import bg.softuni.WeddingApp.service.impl.WeddingStoryServiceImpl;
 import jakarta.validation.Valid;
@@ -28,11 +26,6 @@ public class UserController {
     @ModelAttribute("userRegistrationDTO")
     public UserRegistrationDTO initRegistrationDto (Model model){
         return new UserRegistrationDTO();
-    }
-
-    @ModelAttribute("userLoginDTO")
-    public UserLoginDTO initLoginDto (){
-        return new UserLoginDTO();
     }
 
     @GetMapping("/register")
@@ -61,34 +54,5 @@ public class UserController {
         return "login";
     }
 
-    @PostMapping("/login")
-    public String login(@Valid UserLoginDTO userLoginDTO,
-                        BindingResult bindingResult,
-                        RedirectAttributes redirectAttributes){
-        if (bindingResult.hasErrors() ){
-            redirectAttributes.addFlashAttribute("userLoginDTO", userLoginDTO);
-            redirectAttributes.addFlashAttribute(
-                    "org.springframework.validation.BindingResult.userLoginDTO", bindingResult);
 
-            return "redirect:/login";
-        }
-
-        if (!this.userService.login(userLoginDTO)){
-            redirectAttributes.addFlashAttribute("userLoginDTO", userLoginDTO);
-            redirectAttributes.addFlashAttribute("badCredentials", true);
-
-            return "redirect:/login";
-        }
-
-        return "redirect:/home";
-    }
-
-    @GetMapping("/logout")
-    public String logout(Model model) {
-        WeddingStory mostCommentedStory = weddingStoryService.getMostCommentedStory();
-
-        model.addAttribute("mostCommented", mostCommentedStory);
-        userService.logOutUser();
-        return "index";
-    }
 }

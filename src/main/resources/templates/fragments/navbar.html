@@ -9,27 +9,30 @@
         <li>
             <a href="/">Home</a>
         </li>
-        <li>
+        <li sec:authorize="!isAuthenticated()">
             <a href="/login">Login</a>
         </li>
-        <li >
+        <li sec:authorize="!isAuthenticated()">
             <a href="/register">Register</a>
         </li>
         <li>
             <a href="/about">About</a>
         </li>
-        <li >
+        <li sec:authorize="isAuthenticated()">
             <a href="/add">Add new wedding</a>
         </li>
-        <li>
+        <li sec:authorize="isAuthenticated()">
             <a href="/">Profile</a>
         </li>
-        <li>
+        <li sec:authorize="hasRole('ADMIN')">
             <a href="/">Admin</a>
         </li>
-        <li>
+        <li sec:authorize="isAuthenticated()">
             <div>
-                <a href="/logout">Logout</a>
+                <form th:method="post"
+                th:action="@{/logout}">
+                    <input type="submit" value="Logout">
+                </form>
             </div>
 
         </li>

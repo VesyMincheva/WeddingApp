@@ -1,6 +1,6 @@
 package bg.softuni.WeddingApp.service.impl;
 
-import bg.softuni.WeddingApp.model.enums.UserRoles;
+import bg.softuni.WeddingApp.model.enums.UserRolesEnum;
 import bg.softuni.WeddingApp.model.entity.Role;
 import bg.softuni.WeddingApp.repository.RoleRepository;
 import bg.softuni.WeddingApp.service.RoleService;
@@ -18,6 +18,6 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role getRoleByName (String name) {
 
-        return this.roleRepository.findByName(UserRoles.valueOf(name));
+        return this.roleRepository.findByRole(UserRolesEnum.valueOf(name));
     }
 }

@@ -25,11 +25,6 @@ public class HomeController {
         return "index";
     }
 
-    @GetMapping("/home")
-    public String loggedHome (){
-        return "home";
-    }
-
     @GetMapping("/about")
     public String about() {
         return "about";

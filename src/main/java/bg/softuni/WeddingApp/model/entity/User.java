@@ -3,6 +3,7 @@ package bg.softuni.WeddingApp.model.entity;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -26,12 +27,11 @@ public class User extends BaseEntity{
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")}
     )
-    private Set<Role> roles;
-
+    private List<Role> roles;
 
     public User() {
-        this.roles = new HashSet<>();
     }
+
 
     public String getUsername() {
         return username;
@@ -57,12 +57,11 @@ public class User extends BaseEntity{
         this.password = password;
     }
 
-    public Set<Role> getRoles () {
+    public List<Role> getRoles() {
         return roles;
     }
 
-    public User setRoles (Set<Role> roles) {
-
+    public User setRoles(List<Role> roles) {
         this.roles = roles;
         return this;
     }

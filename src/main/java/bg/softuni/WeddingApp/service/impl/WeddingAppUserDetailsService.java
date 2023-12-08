@@ -1,12 +1,13 @@
 package bg.softuni.WeddingApp.service.impl;
 
+import bg.softuni.WeddingApp.model.entity.Role;
 import bg.softuni.WeddingApp.model.entity.User;
 import bg.softuni.WeddingApp.repository.UserRepository;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-import java.util.List;
 
 public class WeddingAppUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
@@ -19,16 +20,24 @@ public class WeddingAppUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findUserByUsername(username)
-                .map(this::mapUserToUserDetails)
+                .map(WeddingAppUserDetailsService::mapUserToUserDetails)
                 .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found!"));
 
     }
 
-    private UserDetails mapUserToUserDetails(User user){
-        return org.springframework.security.core.userdetails.User
+    private static UserDetails mapUserToUserDetails(User user){
+        UserDetails userDetails = org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
-                .authorities(List.of()) //TODO: add roles
+                .authorities(user.getRoles()
+                        .stream()
+                        .map(WeddingAppUserDetailsService::mapRoles)
+                        .toList())
                 .build();
+        return userDetails;
+    }
+
+    private static GrantedAuthority mapRoles (Role role){
+        return new SimpleGrantedAuthority("ROLE_" + role.getRole().name());
     }
 }

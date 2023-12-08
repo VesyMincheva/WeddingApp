@@ -1,5 +1,6 @@
 <html lang="en"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head th:replace="~{fragments/head}">
 
 </head>
@@ -14,8 +15,8 @@
         <div class="row g-3 align-items-center">
 
             <form
-                    action="/login"
-                    method="POST">
+                    th:action="@{/login}"
+                    th:method="POST">
 
                 <h3 class="mt-5 text-center">
                     <strong class="rounded  pl-3 text-danger">Enter valid

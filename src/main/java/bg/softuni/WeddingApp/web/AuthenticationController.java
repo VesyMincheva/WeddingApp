@@ -13,14 +13,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
-public class UserController {
+public class AuthenticationController {
 
     private final UserService userService;
-    private final WeddingStoryServiceImpl weddingStoryService;
 
-    public UserController(UserService userService, WeddingStoryServiceImpl weddingStoryService) {
+    public AuthenticationController(UserService userService, WeddingStoryServiceImpl weddingStoryService) {
         this.userService = userService;
-        this.weddingStoryService = weddingStoryService;
     }
 
     @ModelAttribute("userRegistrationDTO")
@@ -52,6 +50,11 @@ public class UserController {
     @GetMapping("/login")
     public String login() {
         return "login";
+    }
+
+    @GetMapping("/logout")
+    public String logout() {
+        return "index";
     }
 
 

@@ -1,6 +1,6 @@
 package bg.softuni.WeddingApp.model.entity;
 
-import bg.softuni.WeddingApp.model.enums.UserRoles;
+import bg.softuni.WeddingApp.model.enums.UserRolesEnum;
 import jakarta.persistence.*;
 
 @Entity
@@ -8,17 +8,21 @@ import jakarta.persistence.*;
 public class Role extends BaseEntity{
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private UserRoles name;
+    private UserRolesEnum role;
 
     public Role() {
 
     }
 
-    public UserRoles getName() {
-        return name;
+    public Role(UserRolesEnum userRoles) {
+        this.role = userRoles;
     }
 
-    public void setName(UserRoles name) {
-        this.name = name;
+    public UserRolesEnum getRole() {
+        return role;
+    }
+
+    public void setRole(UserRolesEnum name) {
+        this.role = name;
     }
 }

@@ -1,5 +1,5 @@
 package bg.softuni.WeddingApp.model.enums;
 
-public enum UserRoles {
+public enum UserRolesEnum {
     USER, ADMIN
 }

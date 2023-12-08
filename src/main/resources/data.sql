@@ -1,6 +1,6 @@
 -- users
 INSERT INTO users (id, first_name, last_name, username, email, password)
-VALUES (1, 'Admin', 'Adminov', 'admin', 'admin@admin.com', '26dd1ba9ae974a70136ea4463046371516661b0601ca0fb83a905876ca549b3473dd524d578e241b');
+VALUES (1, 'Admin', 'Adminov', 'admin', 'admin@admin.com', '52c99076fd47aa98d0d51549d5d3b3cbe9a87d069a4117d1be5f26ebdf9abcecd94095348344ea3b8c31a500d6de9f34');
 
 INSERT INTO users (id, first_name, last_name, username, email,  password)
 VALUES (2, 'User', 'Userov', 'user2', 'user@user.com', '26dd1ba9ae974a70136ea4463046371516661b0601ca0fb83a905876ca549b3473dd524d578e241b');
@@ -42,10 +42,10 @@ INSERT INTO users (id, first_name, last_name, username, email, password)
 VALUES (14, 'Irka', 'Borisova', 'irka','irka@mail.com', '26dd1ba9ae974a70136ea4463046371516661b0601ca0fb83a905876ca549b3473dd524d578e241b');
 
 -- user roles
-INSERT INTO roles (id, name)
+INSERT INTO roles (id, role)
 VALUES (1, 'ADMIN');
 
-INSERT INTO roles (id, name)
+INSERT INTO roles (id, role)
 VALUES (2, 'USER');
 
 -- locations

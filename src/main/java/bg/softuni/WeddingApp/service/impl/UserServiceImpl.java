@@ -28,20 +28,17 @@ public class UserServiceImpl implements UserService {
         this.passwordEncoder = passwordEncoder;
         this.modelMapper = modelMapper;
     }
-
     @Override
     public boolean register(UserRegistrationDTO userRegistrationDTO) {
         // password == confirmPassword
         if (!userRegistrationDTO.getPassword().equals(userRegistrationDTO.getConfirmPassword())){
             throw new RuntimeException("Passwords do not match!");
         }
-
         //duplicate email
         Optional<User> userByEmail = userRepository.findUserByEmail(userRegistrationDTO.getEmail());
         if (userByEmail.isPresent()){
             throw new RuntimeException("Email already used!");
         }
-
         //duplicate user
         Optional<User> userByUsername = userRepository.findUserByUsername(userRegistrationDTO.getUsername());
         if (userByUsername.isPresent()){
@@ -55,5 +52,4 @@ public class UserServiceImpl implements UserService {
 
         return true;
     }
-
 }

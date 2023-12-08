@@ -14,7 +14,6 @@ public class StyleServiceImpl implements StyleService {
     public StyleServiceImpl(StyleRepository styleRepository) {
         this.styleRepository = styleRepository;
     }
-
     @Override
     public Style getStyle(String name) {
         return styleRepository.findByName(WeddingStyleEnum.valueOf(name));

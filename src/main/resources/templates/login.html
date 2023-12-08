@@ -17,12 +17,6 @@
             <form
                     th:action="@{/login}"
                     th:method="POST">
-
-                <h3 class="mt-5 text-center">
-                    <strong class="rounded  pl-3 text-danger">Enter valid
-                        username and
-                        password</strong>
-                </h3>
                 <div>
                     <div class="col-auto">
                         <label for="inputUsername" class="col-form-label ">Username</label>
@@ -30,6 +24,7 @@
                     <div class="col-auto">
                         <input type="text"
                                name="username"
+                               th:value="${username}"
                                id="inputUsername"
                                class="form-control"
                                aria-describedby="usernameHelpInline">
@@ -56,6 +51,9 @@
                         </small>
                     </div>
                 </div>
+                <h3 th:if="${badCredentials}" class="mt-5 text-center">
+                    <strong class="rounded  pl-3 text-danger">Invalid username or password</strong>
+                </h3>
                 <div class="d-flex justify-content-center mt-2">
                     <button class="btn btn-primary btn-block w-50" type="submit">Login</button>
                 </div>

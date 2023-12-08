@@ -70,6 +70,62 @@ public class WeddingStoryController {
         return modelAndView;
     }
 
+    @GetMapping("/stories/traditional")
+    public ModelAndView getAllTraditionalWeddings(){
+        List<StoryGetAllDto> traditionalWeddings = weddingStoryService.getAllTraditionalWeddings();
+        ModelAndView modelAndView = new ModelAndView("wedding-traditional");
+        modelAndView.addObject("traditionalWeddings", traditionalWeddings);
+        return modelAndView;
+    }
+
+    @GetMapping("/stories/modern")
+    public ModelAndView getAllModernWeddings(){
+        List<StoryGetAllDto> modernWeddings = weddingStoryService.getAllModernWeddings();
+        ModelAndView modelAndView = new ModelAndView("wedding-modern");
+        modelAndView.addObject("modernWeddings", modernWeddings);
+        return modelAndView;
+    }
+
+    @GetMapping("/stories/vintage")
+    public ModelAndView getAllVintageWeddings(){
+        List<StoryGetAllDto> vintageWeddings = weddingStoryService.getAllVintageWeddings();
+        ModelAndView modelAndView = new ModelAndView("wedding-vintage");
+        modelAndView.addObject("vintageWeddings", vintageWeddings);
+        return modelAndView;
+    }
+
+    @GetMapping("/stories/rustic")
+    public ModelAndView getAllRusticWeddings(){
+        List<StoryGetAllDto> rusticWeddings = weddingStoryService.getAllRusticWeddings();
+        ModelAndView modelAndView = new ModelAndView("wedding-rustic");
+        modelAndView.addObject("rusticWeddings", rusticWeddings);
+        return modelAndView;
+    }
+
+    @GetMapping("/stories/beach")
+    public ModelAndView getAllBeachWeddings(){
+        List<StoryGetAllDto> beachWeddings = weddingStoryService.getAllBeachWeddings();
+        ModelAndView modelAndView = new ModelAndView("wedding-beach");
+        modelAndView.addObject("beachWeddings", beachWeddings);
+        return modelAndView;
+    }
+
+    @GetMapping("/stories/indoor")
+    public ModelAndView getAllIndoorWeddings(){
+        List<StoryGetAllDto> indoorWeddings = weddingStoryService.getAllIndoorWeddings();
+        ModelAndView modelAndView = new ModelAndView("wedding-indoor");
+        modelAndView.addObject("indoorWeddings", indoorWeddings);
+        return modelAndView;
+    }
+
+    @GetMapping("/stories/garden")
+    public ModelAndView getAllGardenWeddings(){
+        List<StoryGetAllDto> gardenWeddings = weddingStoryService.getAllGardenWeddings();
+        ModelAndView modelAndView = new ModelAndView("wedding-garden");
+        modelAndView.addObject("gardenWeddings", gardenWeddings);
+        return modelAndView;
+    }
+
     @GetMapping("/stories/details/{id}")
     public ModelAndView storyDetail(@PathVariable("id") Long id){
         StoryDetailsDto story = weddingStoryService.getDetails(id);

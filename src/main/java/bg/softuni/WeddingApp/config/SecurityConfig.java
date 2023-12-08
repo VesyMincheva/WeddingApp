@@ -21,7 +21,15 @@ public class SecurityConfig {
                         requests -> requests
                                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                                 .requestMatchers("/", "/login", "/register", "/about").permitAll()
+                                .requestMatchers("/login-error").permitAll()
                                 .requestMatchers("/stories/all").permitAll()
+                                .requestMatchers("/stories/traditional").permitAll()
+                                .requestMatchers("/stories/modern").permitAll()
+                                .requestMatchers("/stories/rustic").permitAll()
+                                .requestMatchers("/stories/vintage").permitAll()
+                                .requestMatchers("/stories/beach").permitAll()
+                                .requestMatchers("/stories/indoor").permitAll()
+                                .requestMatchers("/stories/garden").permitAll()
                                 .anyRequest().authenticated()
                 ).formLogin(
                   form -> {
@@ -29,7 +37,7 @@ public class SecurityConfig {
                               .usernameParameter("username")
                               .passwordParameter("password")
                               .defaultSuccessUrl("/")
-                              .failureForwardUrl("/login");
+                              .failureForwardUrl("/login-error");
                   }
                 ).logout(
                         logout -> {

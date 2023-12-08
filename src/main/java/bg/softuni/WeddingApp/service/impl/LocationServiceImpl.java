@@ -13,7 +13,6 @@ public class LocationServiceImpl implements LocationService {
     public LocationServiceImpl(LocationRepository locationRepository) {
         this.locationRepository = locationRepository;
     }
-
     @Override
     public Location getLocation(String name) {
         return locationRepository.findByName(LocationEnum.valueOf(name));

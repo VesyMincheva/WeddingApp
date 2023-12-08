@@ -13,6 +13,6 @@ public class UserProfileController {
 
     @GetMapping("/bicycle")
     public String userBicycle(){
-        return "bicycle";
+        return "wedding-traditional";
     }
 }

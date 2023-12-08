@@ -1,7 +1,9 @@
 package bg.softuni.WeddingApp.web;
 
 import bg.softuni.WeddingApp.model.dto.UserRegistrationDTO;
+import bg.softuni.WeddingApp.model.entity.WeddingStory;
 import bg.softuni.WeddingApp.service.UserService;
+import bg.softuni.WeddingApp.service.WeddingStoryService;
 import bg.softuni.WeddingApp.service.impl.WeddingStoryServiceImpl;
 import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
@@ -16,9 +18,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class AuthenticationController {
 
     private final UserService userService;
+    private final WeddingStoryService weddingStoryService;
 
-    public AuthenticationController(UserService userService, WeddingStoryServiceImpl weddingStoryService) {
+    public AuthenticationController(UserService userService, WeddingStoryService weddingStoryService) {
         this.userService = userService;
+        this.weddingStoryService = weddingStoryService;
     }
 
     @ModelAttribute("userRegistrationDTO")
@@ -52,8 +56,20 @@ public class AuthenticationController {
         return "login";
     }
 
+    @PostMapping("/login-error")
+    public String loginError(@ModelAttribute ("username") String username,
+                             Model model) {
+        model.addAttribute("username", username);
+        model.addAttribute("badCredentials", true);
+
+        return "login";
+    }
+
     @GetMapping("/logout")
-    public String logout() {
+    public String logout(Model model) {
+        WeddingStory mostCommentedStory = weddingStoryService.getMostCommentedStory();
+
+        model.addAttribute("mostCommented", mostCommentedStory);
         return "index";
     }
 

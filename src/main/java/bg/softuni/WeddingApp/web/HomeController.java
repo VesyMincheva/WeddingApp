@@ -17,7 +17,7 @@ public class HomeController {
     }
 
     @GetMapping ("/")
-    public String loggedOutIndex(Model model) {
+    public String getHome(Model model) {
 
         WeddingStory mostCommentedStory = weddingStoryService.getMostCommentedStory();
 

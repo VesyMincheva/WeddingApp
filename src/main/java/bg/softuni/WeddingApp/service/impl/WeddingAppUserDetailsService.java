@@ -15,8 +15,6 @@ public class WeddingAppUserDetailsService implements UserDetailsService {
     public WeddingAppUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
-
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository.findUserByUsername(username)
@@ -24,9 +22,8 @@ public class WeddingAppUserDetailsService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("User " + username + " not found!"));
 
     }
-
     private static UserDetails mapUserToUserDetails(User user){
-        UserDetails userDetails = org.springframework.security.core.userdetails.User
+        return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
                 .authorities(user.getRoles()
@@ -34,7 +31,6 @@ public class WeddingAppUserDetailsService implements UserDetailsService {
                         .map(WeddingAppUserDetailsService::mapRoles)
                         .toList())
                 .build();
-        return userDetails;
     }
 
     private static GrantedAuthority mapRoles (Role role){

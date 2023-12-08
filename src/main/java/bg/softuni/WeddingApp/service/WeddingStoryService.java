@@ -12,8 +12,15 @@ public interface WeddingStoryService {
     void addStory(AddWeddingStoryDTO addWeddingStoryDTO);
 
     WeddingStory getMostCommentedStory();
-
-    List<StoryGetAllDto> getAll();
-
     StoryDetailsDto getDetails(Long id);
+    List<StoryGetAllDto> getAll();
+    List<StoryGetAllDto> getAllTraditionalWeddings();
+    List<StoryGetAllDto> getAllModernWeddings();
+    List<StoryGetAllDto> getAllVintageWeddings();
+    List<StoryGetAllDto> getAllRusticWeddings();
+    List<StoryGetAllDto> getAllBeachWeddings();
+    List<StoryGetAllDto> getAllGardenWeddings();
+    List<StoryGetAllDto> getAllIndoorWeddings();
+
+
 }

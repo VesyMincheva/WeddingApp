@@ -11,13 +11,10 @@ public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
 
     public RoleServiceImpl (RoleRepository roleRepository) {
-
         this.roleRepository = roleRepository;
     }
-
     @Override
     public Role getRoleByName (String name) {
-
         return this.roleRepository.findByRole(UserRolesEnum.valueOf(name));
     }
 }

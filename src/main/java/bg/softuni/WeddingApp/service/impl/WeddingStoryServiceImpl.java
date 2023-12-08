@@ -7,9 +7,12 @@ import bg.softuni.WeddingApp.model.entity.Location;
 import bg.softuni.WeddingApp.model.entity.Style;
 import bg.softuni.WeddingApp.model.entity.User;
 import bg.softuni.WeddingApp.model.entity.WeddingStory;
+import bg.softuni.WeddingApp.model.enums.LocationEnum;
+import bg.softuni.WeddingApp.model.enums.WeddingStyleEnum;
 import bg.softuni.WeddingApp.repository.UserRepository;
 import bg.softuni.WeddingApp.repository.WeddingStoryRepository;
 import bg.softuni.WeddingApp.service.LocationService;
+import bg.softuni.WeddingApp.service.StyleService;
 import bg.softuni.WeddingApp.service.WeddingStoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -23,16 +26,15 @@ public class WeddingStoryServiceImpl implements WeddingStoryService {
     private final WeddingStoryRepository weddingStoryRepository;
 
     private final ModelMapper modelMapper;
-
     private final UserRepository userRepository;
     private final LocationService locationService;
-    private final StyleServiceImpl styleService;
+    private final StyleService styleService;
 
     public WeddingStoryServiceImpl(WeddingStoryRepository weddingStoryRepository,
                                    ModelMapper modelMapper,
                                    UserRepository userRepository,
                                    LocationService locationService,
-                                   StyleServiceImpl styleService) {
+                                   StyleService styleService) {
         this.weddingStoryRepository = weddingStoryRepository;
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
@@ -56,17 +58,69 @@ public class WeddingStoryServiceImpl implements WeddingStoryService {
     }
 
     public WeddingStory getMostCommentedStory() {
-        WeddingStory mostCommentedStory = weddingStoryRepository.findMostCommented().stream()
+        return weddingStoryRepository.findMostCommented().stream()
                 .findFirst().orElse(null);
-        return mostCommentedStory;
     }
 
     @Override
     public List<StoryGetAllDto> getAll() {
-        return weddingStoryRepository.findAll().stream()
+        return weddingStoryRepository
+                .findAll()
+                .stream()
                 .map(story -> modelMapper.map(story,StoryGetAllDto.class))
                 .toList();
     }
+
+    @Override
+    public List<StoryGetAllDto> getAllTraditionalWeddings() {
+        return weddingStoryRepository
+                .findAllByStyle(styleService.getStyle(WeddingStyleEnum.TRADITIONAL.name()))
+                .stream()
+                .map(story -> modelMapper.map(story, StoryGetAllDto.class))
+                .toList();
+    }
+    public List<StoryGetAllDto> getAllModernWeddings(){
+        return weddingStoryRepository
+                .findAllByStyle(styleService.getStyle(WeddingStyleEnum.MODERN.name()))
+                .stream()
+                .map(story -> modelMapper.map(story, StoryGetAllDto.class))
+                .toList();
+    };
+    public List<StoryGetAllDto> getAllVintageWeddings(){
+        return weddingStoryRepository
+                .findAllByStyle(styleService.getStyle(WeddingStyleEnum.VINTAGE.name()))
+                .stream()
+                .map(story -> modelMapper.map(story, StoryGetAllDto.class))
+                .toList();
+    };
+    public List<StoryGetAllDto> getAllRusticWeddings(){
+        return weddingStoryRepository
+                .findAllByStyle(styleService.getStyle(WeddingStyleEnum.RUSTIC.name()))
+                .stream()
+                .map(story -> modelMapper.map(story, StoryGetAllDto.class))
+                .toList();
+    };
+    public List<StoryGetAllDto> getAllBeachWeddings(){
+        return weddingStoryRepository
+                .findAllByLocation(locationService.getLocation(LocationEnum.BEACH.name()))
+                .stream()
+                .map(story -> modelMapper.map(story, StoryGetAllDto.class))
+                .toList();
+    };
+    public List<StoryGetAllDto> getAllGardenWeddings(){
+        return weddingStoryRepository
+                .findAllByLocation(locationService.getLocation(LocationEnum.GARDEN.name()))
+                .stream()
+                .map(story -> modelMapper.map(story, StoryGetAllDto.class))
+                .toList();
+    };
+    public List<StoryGetAllDto> getAllIndoorWeddings(){
+        return weddingStoryRepository
+                .findAllByLocation(locationService.getLocation(LocationEnum.INDOOR.name()))
+                .stream()
+                .map(story -> modelMapper.map(story, StoryGetAllDto.class))
+                .toList();
+    };
 
     @Override
     public StoryDetailsDto getDetails(Long id) {

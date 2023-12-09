@@ -16,9 +16,9 @@ public class CloudService {
 
     public CloudService(){
         cloudinary =new Cloudinary(ObjectUtils.asMap(
-                "cloud_name", "drlwiuzbk",
-                "api_key", "478428421531267",
-                "api_secret", "GAaBX6HUWDq-e244nsZJsR5561Q"));
+                "cloud_name", "*******",
+                "api_key", "**********",
+                "api_secret", "***********"));
     }
 
     public String saveImage(MultipartFile multipartFile){

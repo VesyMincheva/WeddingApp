@@ -14,7 +14,7 @@
 <!-- Top Container -->
 <div class="row justify-content-center ">
     <form id="add-route-form" class="w-50 rounded text-white mt-5"
-          th:action="@{/add}"
+          th:action="@{/story/add}"
           th:method="post"
           th:object="${addWeddingStoryDTO}"
           enctype="multipart/form-data">
@@ -66,9 +66,9 @@
                             th:text="${e}"
                             th:value="${e}">
                         </option>
-                    <p class="invalid-feedback errors alert alert-danger">
+                    <small class="invalid-feedback errors alert alert-danger">
                         Select location of your wedding!
-                    </p>
+                    </small>
                 </select>
             </div>
         </div>
@@ -84,10 +84,24 @@
                             th:text="${e}"
                             th:value="${e}">
                         Select style of the wedding</option>
-                    <p class="invalid-feedback errors alert alert-danger">
+                    <small class="invalid-feedback errors alert alert-danger">
                         Select style of your wedding!
-                    </p>
+                    </small>
                 </select>
+            </div>
+        </div>
+        <div>
+            <div class="form-group">
+                <label for="picture" class="col-form-label ">Picture file</label>
+            </div>
+            <div class="form-group">
+                <input type="file" name="picture"
+                       required
+                       id="picture"
+                       class="form-control-file"
+                       aria-describedby="picture">
+                <small id="pictureError"
+                       class="invalid-feedback  form-text bg-danger rounded">Must be valid picture</small>
             </div>
         </div>
 

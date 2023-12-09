@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface WeddingStoryService {
 
-    void addStory(AddWeddingStoryDTO addWeddingStoryDTO);
+    void addStory(AddWeddingStoryDTO addWeddingStoryDTO, String username);
 
     WeddingStory getMostCommentedStory();
     StoryDetailsDto getDetails(Long id);

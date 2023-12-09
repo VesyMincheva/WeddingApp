@@ -4,8 +4,8 @@ import bg.softuni.WeddingApp.model.dto.AddWeddingStoryDTO;
 import bg.softuni.WeddingApp.model.dto.StoryDetailsDto;
 import bg.softuni.WeddingApp.model.dto.StoryGetAllDto;
 import bg.softuni.WeddingApp.model.entity.Location;
+import bg.softuni.WeddingApp.model.entity.Picture;
 import bg.softuni.WeddingApp.model.entity.Style;
-import bg.softuni.WeddingApp.model.entity.User;
 import bg.softuni.WeddingApp.model.entity.WeddingStory;
 import bg.softuni.WeddingApp.model.enums.LocationEnum;
 import bg.softuni.WeddingApp.model.enums.WeddingStyleEnum;
@@ -17,8 +17,8 @@ import bg.softuni.WeddingApp.service.WeddingStoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class WeddingStoryServiceImpl implements WeddingStoryService {
@@ -30,29 +30,42 @@ public class WeddingStoryServiceImpl implements WeddingStoryService {
     private final LocationService locationService;
     private final StyleService styleService;
 
+    private final CloudService cloudService;
+
     public WeddingStoryServiceImpl(WeddingStoryRepository weddingStoryRepository,
                                    ModelMapper modelMapper,
                                    UserRepository userRepository,
                                    LocationService locationService,
-                                   StyleService styleService) {
+                                   StyleService styleService,
+                                   CloudService cloudService) {
         this.weddingStoryRepository = weddingStoryRepository;
         this.modelMapper = modelMapper;
         this.userRepository = userRepository;
         this.locationService = locationService;
         this.styleService = styleService;
+        this.cloudService = cloudService;
     }
 
     @Override
-    public void addStory(AddWeddingStoryDTO addWeddingStoryDTO) {
-//        Optional<User> author = userRepository.findUserByUsername();
+    public void addStory(AddWeddingStoryDTO addWeddingStoryDTO, String username) {
         Location location = locationService.getLocation(addWeddingStoryDTO.getLocation());
         Style style = styleService.getStyle(addWeddingStoryDTO.getStyle());
+        String pictureUrl = cloudService.saveImage(addWeddingStoryDTO.getPicture());
+
         WeddingStory newWeddingStory = new WeddingStory();
-//        author.ifPresent(newWeddingStory::setAuthor);
+        newWeddingStory.setAuthor(userRepository.findUserByUsername(username).orElse(null));
         newWeddingStory.setTitle(addWeddingStoryDTO.getTitle());
         newWeddingStory.setContent(addWeddingStoryDTO.getContent());
         newWeddingStory.setLocation(location);
         newWeddingStory.setStyle(style);
+
+        Picture picture = new Picture();
+        picture.setUrl(pictureUrl);
+        picture.setAuthor(userRepository.findUserByUsername(username).orElse(null));
+        picture.setStory(newWeddingStory);
+        picture.setTitle(addWeddingStoryDTO.getPicture().getOriginalFilename());
+
+        newWeddingStory.setPictures(Collections.singletonList(picture));
 
         weddingStoryRepository.save(newWeddingStory);
     }

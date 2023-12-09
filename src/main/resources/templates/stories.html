@@ -30,7 +30,7 @@
             <h2 th:text="${story.getTitle()}">Your Story</h2>
             <p >Wedding style: <th:block th:text="${story.getStyle().getName()}"></th:block> </p>
             <p >Wedding location: <th:block th:text="${story.getLocation().getName()}"></th:block>  </p>
-            <a th:href="@{/stories/details/:id(id=${story.getId()})}" class="btn">Learn More</a>
+            <a th:href="@{/stories/details/{id}(id = ${story.getId()})}" class="btn">Read More</a>
         </div>
     </section>
 </div>

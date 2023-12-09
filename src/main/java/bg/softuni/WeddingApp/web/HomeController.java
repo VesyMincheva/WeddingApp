@@ -9,18 +9,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class HomeController {
-
     private final WeddingStoryService weddingStoryService;
-
     public HomeController(WeddingStoryService weddingStoryService) {
         this.weddingStoryService = weddingStoryService;
     }
 
     @GetMapping ("/")
     public String getHome(Model model) {
-
         WeddingStory mostCommentedStory = weddingStoryService.getMostCommentedStory();
-
         model.addAttribute("mostCommented", mostCommentedStory);
         return "index";
     }

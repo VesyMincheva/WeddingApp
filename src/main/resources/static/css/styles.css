@@ -72,6 +72,26 @@ img {
     box-shadow: var(--shadow);
 }
 
+.main-nav button{
+    background: var(--primary);
+    display: block;
+    text-decoration: none;
+    padding: 0.8rem;
+    text-align: center;
+    color: var(--dark);
+    text-transform: uppercase;
+    font-size: 1.1rem;
+    box-shadow: var(--shadow);
+    box-sizing: border-box;
+    width: 100%;
+    border: none;
+}
+
+.main-nav button:hover {
+    background: var(--dark);
+    color: var(--light);
+}
+
 .main-nav a:hover {
     background: var(--dark);
     color: var(--light);
@@ -169,8 +189,12 @@ img {
 }
 
 .gallery img {
-    width: 100%;
+    width: 400px;
     box-shadow: var(--shadow);
+}
+
+.gallery-container{
+    display: flex;
 }
 
 /* Footer */
@@ -360,5 +384,11 @@ body {
 
 .invalid-feedback{
     color: white; !important;
+}
+
+.commentsContainer {
+    background-color: var(--lightGray);
+    padding: 20px;
+    border-radius: 10px;
 }
 

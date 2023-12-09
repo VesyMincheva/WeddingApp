@@ -30,19 +30,19 @@ public class WeddingStory extends BaseEntity{
     private List<Comment> comments;
 
     @OneToMany(targetEntity = Picture.class, mappedBy = "story", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<Picture> pictures;
+    private List<Picture> pictures;
 
 
     public WeddingStory() {
         this.comments = new ArrayList<>();
-        this.pictures = new HashSet<>();
+        this.pictures = new ArrayList<>();
     }
 
-    public Set<Picture> getPictures() {
+    public List<Picture> getPictures() {
         return pictures;
     }
 
-    public WeddingStory setPictures(Set<Picture> pictures) {
+    public WeddingStory setPictures(List<Picture> pictures) {
         this.pictures = pictures;
         return this;
     }

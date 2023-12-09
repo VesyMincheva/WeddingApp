@@ -1,23 +1,39 @@
 package bg.softuni.WeddingApp.model.dto;
 
-import bg.softuni.WeddingApp.model.entity.Location;
-import bg.softuni.WeddingApp.model.entity.Style;
-import jakarta.validation.constraints.NotNull;
-
-import java.time.LocalDate;
+import jakarta.validation.constraints.NotBlank;
+import org.springframework.web.multipart.MultipartFile;
+import java.util.List;
 
 public class AddWeddingStoryDTO {
-
-    @NotNull
+    @NotBlank
     private String title;
-    @NotNull
+    @NotBlank
     private String content;
-    @NotNull
+    @NotBlank
     private String location;
-    @NotNull
+    @NotBlank
     private String style;
 
-    public AddWeddingStoryDTO() {
+    private MultipartFile picture;
+
+       public AddWeddingStoryDTO() {
+    }
+
+    public AddWeddingStoryDTO(String title, String content, String location, String style, MultipartFile picture) {
+        this.title = title;
+        this.content = content;
+        this.location = location;
+        this.style = style;
+        this.picture = picture;
+    }
+
+    public MultipartFile getPicture() {
+        return picture;
+    }
+
+    public AddWeddingStoryDTO setPicture(MultipartFile picture) {
+        this.picture = picture;
+        return this;
     }
 
     public String getTitle() {

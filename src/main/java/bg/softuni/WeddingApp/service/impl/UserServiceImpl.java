@@ -1,5 +1,6 @@
 package bg.softuni.WeddingApp.service.impl;
 
+import bg.softuni.WeddingApp.model.dto.UserProfileDTO;
 import bg.softuni.WeddingApp.model.dto.UserRegistrationDTO;
 import bg.softuni.WeddingApp.model.entity.Role;
 import bg.softuni.WeddingApp.model.entity.User;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -51,5 +54,30 @@ public class UserServiceImpl implements UserService {
         this.userRepository.save(user);
 
         return true;
+    }
+
+    @Override
+    public User getUserByUserName(String username) {
+        return userRepository.findUserByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    @Override
+    public List<UserProfileDTO> getAll() {
+        List<UserProfileDTO> mappedUsers = userRepository
+                .findAll()
+                .stream()
+                .map(this::mapToUserDto)
+                .collect(Collectors.toList());
+        return mappedUsers;
+    }
+
+    private UserProfileDTO mapToUserDto(User user){
+        UserProfileDTO userProfileDTO = new UserProfileDTO();
+        userProfileDTO.setUsername(user.getUsername());
+        userProfileDTO.setEmail(user.getEmail());
+        userProfileDTO.setFirstName(user.getFirstName());
+        userProfileDTO.setLastName(user.getLastName());
+        return userProfileDTO;
     }
 }

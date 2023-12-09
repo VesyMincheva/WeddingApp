@@ -58,7 +58,7 @@
         <div>
             <h2>The most commented wedding: <th:block th:text="${mostCommented.getTitle()}"></th:block></h2>
             <p>Read more about the most commented wedding and give your opinion to help other users.</p>
-            <a th:href="@{/stories/details/:id(id = ${mostCommented.getId()})}" class="btn">Read More</a>
+            <a th:href="@{/stories/details/{id}(id = ${mostCommented.getId()})}" class="btn">Read More</a>
         </div>
     </section>
 

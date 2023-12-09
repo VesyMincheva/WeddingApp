@@ -30,6 +30,7 @@ public class SecurityConfig {
                                 .requestMatchers("/stories/beach").permitAll()
                                 .requestMatchers("/stories/indoor").permitAll()
                                 .requestMatchers("/stories/garden").permitAll()
+                                .requestMatchers("/api/**").permitAll()
                                 .anyRequest().authenticated()
                 ).formLogin(
                   form -> {
@@ -43,6 +44,7 @@ public class SecurityConfig {
                         logout -> {
                             logout.logoutUrl("/logout")
                                     .logoutSuccessUrl("/")
+                                    .deleteCookies("JSESSIONID")
                                     .invalidateHttpSession(true);
                         }
 

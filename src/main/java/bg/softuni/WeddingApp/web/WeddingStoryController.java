@@ -7,6 +7,8 @@ import bg.softuni.WeddingApp.model.enums.LocationEnum;
 import bg.softuni.WeddingApp.model.enums.WeddingStyleEnum;
 import bg.softuni.WeddingApp.service.WeddingStoryService;
 import jakarta.validation.Valid;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,17 +18,15 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class WeddingStoryController {
-
     private final WeddingStoryService weddingStoryService;
-
     public WeddingStoryController(WeddingStoryService weddingStoryService) {
         this.weddingStoryService = weddingStoryService;
     }
-
     @ModelAttribute("locations")
     public LocationEnum[] locations(){
         return LocationEnum.values();
@@ -42,24 +42,24 @@ public class WeddingStoryController {
         return new AddWeddingStoryDTO();
     }
 
-
-    @GetMapping("/add")
+    @GetMapping("/story/add")
     public String add(){
         return "add-story";
     }
 
-    @PostMapping("/add")
+    @PostMapping("/story/add")
     public String add(@Valid AddWeddingStoryDTO addWeddingStoryDTO,
                       BindingResult bindingResult,
-                      RedirectAttributes redirectAttributes){
+                      RedirectAttributes redirectAttributes,
+                      @AuthenticationPrincipal UserDetails author){
         if (bindingResult.hasErrors()){
             redirectAttributes.addFlashAttribute("addWeddingStoryDTO", addWeddingStoryDTO);
             redirectAttributes.addFlashAttribute(
                     "org.springframework.validation.BindingResult.addWeddingStoryDTO",bindingResult);
-            return "redirect:/add";
+            return "redirect:/story/add";
         }
-        weddingStoryService.addStory(addWeddingStoryDTO);
-        return "redirect:/home";
+        weddingStoryService.addStory(addWeddingStoryDTO, author.getUsername());
+        return "redirect:/";
     }
 
     @GetMapping("/stories/all")

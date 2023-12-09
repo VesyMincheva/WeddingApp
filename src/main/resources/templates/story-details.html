@@ -7,7 +7,7 @@
     <header>
         <nav th:replace="~{fragments/navbar}"></nav>
     </header>
-
+        <input type="hidden" name="storyId" id="storyId" th:value="${story.id}">
         <section class="route-info text-center">
             <h4 id="track-name"></h4>
             <p>Title: <span th:text="${story.getTitle()}" ></span></p>
@@ -19,9 +19,12 @@
             <h4>Full story:</h4>
             <p th:text="${story.getContent()}" id="route-description">Full story </p>
         </section>
+        <section class="gallery-container">
         <section th:each="picture : ${story.getPictures()}" class="gallery">
-            <img class="rounded" th:src="${picture.getUrl()}" height="100%" alt="">
+            <img class="rounded" th:src="${picture.getUrl()}" width="50px"  alt="">
         </section>
+        </section>
+
         <section class="comments">
             <h1>Comments</h1>
 
@@ -55,15 +58,14 @@
 
             <!-- All comments section -->
             <div>
-
-                <span id="commentCtnr"><!-- Comments section, filled in by script --></span>
+                <span id="commentContainer"></span>
             </div>
             <!-- EO: All comments section -->
         </section>
 	<!-- Scripts: track and comments
-    <script th:src="@{/js/track.js}"></script>
+    <script th:src="@{/js/track.js}"></script>-->
     <script th:src="@{/js/comments.js}"></script>
-	-->
+
 </div>
 <footer th:replace="~{fragments/footer}"></footer>
 </body>

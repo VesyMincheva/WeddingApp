@@ -19,19 +19,19 @@
             <a href="/about">About</a>
         </li>
         <li sec:authorize="isAuthenticated()">
-            <a href="/add">Add new wedding</a>
+            <a href="/story/add">Add new wedding</a>
         </li>
         <li sec:authorize="isAuthenticated()">
-            <a href="/">Profile</a>
+            <a href="/user/profile">Profile</a>
         </li>
         <li sec:authorize="hasRole('ADMIN')">
-            <a href="/">Admin</a>
+            <a href="/admin">Admin</a>
         </li>
         <li sec:authorize="isAuthenticated()">
             <div>
                 <form th:method="post"
                 th:action="@{/logout}">
-                    <input type="submit" value="Logout">
+                    <button type="submit">LOGOUT</button>
                 </form>
             </div>
 
